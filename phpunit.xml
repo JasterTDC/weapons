@@ -1,0 +1,35 @@
+<phpunit bootstrap="./vendor/autoload.php">
+    <testsuites>
+        <testsuite name="Unit">
+            <directory suffix="Test.php">test/Domain/</directory>
+            <directory suffix="Test.php">test/Application/</directory>
+        </testsuite>
+        <testsuite name="Integration">
+            <directory suffix="Test.php">test/Infrastructure/</directory>
+        </testsuite>
+        <testsuite name="UnitIntegration">
+            <directory suffix="Test.php">test/</directory>
+        </testsuite>
+    </testsuites>
+    <coverage 
+        cacheDirectory=".phpunit/cache"
+        includeUncoveredFiles="true"
+        processUncoveredFiles="true"
+        pathCoverage="false"
+        ignoreDeprecatedCodeUnits="true"
+        disableCodeCoverageIgnore="true">
+        <include>
+            <directory suffix=".php">src/</directory>
+        </include>
+        <exclude>
+            <directory>vendor/</directory>
+        </exclude>
+        <report>
+            <html outputDirectory=".phpunit/html" lowUpperBound="90" highLowerBound="100" />
+        </report>
+    </coverage>
+    <logging>
+        <junit outputFile=".phpunit/index.xml" />
+        <testdoxHtml outputFile=".phpunit/coverage.html"/>
+    </logging>
+</phpunit>

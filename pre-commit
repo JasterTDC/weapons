@@ -1,0 +1,29 @@
+#!/usr/bin/sh
+
+echo "―――――――――――――――――――――――――――――――――――――――――――――"
+echo " Running PSR12 sniffer"
+echo "―――――――――――――――――――――――――――――――――――――――――――――"
+    
+if ! make sniffer; then
+    echo "You shall not pass."
+    exit 1; 
+fi
+
+echo "PSR12 sniffer OK !"
+
+echo "―――――――――――――――――――――――――――――――――――――――――――――"
+echo " Running PHPStan"
+echo "―――――――――――――――――――――――――――――――――――――――――――――"
+
+if ! make stan; then
+    echo "You shall not pass. You have to fix all the stan issues"
+    exit 2;
+fi
+
+echo "PHPStan passed !"
+
+if ! make unit-test; then
+    exit 3;
+fi
+
+echo "Unit tests passed !"
