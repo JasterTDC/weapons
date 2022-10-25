@@ -11,6 +11,11 @@ class StringValueObject
     ) {  
     }
 
+    public function equals(StringValueObject $strValueObject): bool
+    {
+        return $this->value === $strValueObject->value();
+    }
+
     public function value(): string
     {
         return $this->value;
