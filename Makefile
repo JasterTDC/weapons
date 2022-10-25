@@ -40,7 +40,7 @@ unit-test:
 	@echo "┌―――――――――――――――――――――――――――――――――――――――――――――┐"
 	@echo "| Running unit test														 |"
 	@echo "└―――――――――――――――――――――――――――――――――――――――――――――┘"
-	@${PHP_UNIT} --testsuite Unit --no-coverage
+	@${PHP_UNIT} --testsuite Unit ${args} --no-coverage
 
 integration-test: deps/up
 	@echo "--------------------------------------------"
@@ -54,20 +54,20 @@ unit-test-coverage:
 	@echo "└―――――――――――――――――――――――――――――――――――――――――――――┘"
 	@${PHP_UNIT} --testsuite Unit
 
-coverage: deps/up
+coverage:
 	@echo "┌―――――――――――――――――――――――――――――――――――――――――――――┐"
 	@echo "| Running unit test with coverage										  |"
 	@echo "└―――――――――――――――――――――――――――――――――――――――――――――┘"
 	@${PHP_UNIT}
 
-mutant-test: deps/down deps/up
+mutant-test:
 	@${CPHP} /code/vendor/bin/infection
 
 sniffer:
 	@${PHP} /code/vendor/bin/phpcs --standard=PSR12 /code/src /code/test
 
 stan:
-	@${PHP} /code/vendor/bin/phpstan analyze -l max /code/src /code/test
+	@${PHP} /code/vendor/bin/phpstan analyze -l max /code/src
 
 cli:
 	docker run --rm -it \

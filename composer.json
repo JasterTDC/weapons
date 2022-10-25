@@ -13,5 +13,10 @@
     },
     "require": {
         "ramsey/uuid": "^4.3"
+    },
+    "config": {
+        "allow-plugins": {
+            "infection/extension-installer": true
+        }
     }
 }
