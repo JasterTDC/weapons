@@ -6,6 +6,6 @@ namespace JasterTDC\Warriors\Domain\Weapon\WeaponType;
 
 use JasterTDC\Warriors\Domain\Shared\StringValueObject;
 
-class WeaponType extends StringValueObject
+abstract class WeaponType extends StringValueObject
 {
 }
