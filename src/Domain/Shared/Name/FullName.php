@@ -6,7 +6,7 @@ namespace JasterTDC\Warriors\Domain\Shared\Name;
 
 final class FullName
 {
-    public function __construct(
+    private function __construct(
         private Name $name,
         private Lastname $lastname,
         private Alias $alias
@@ -26,5 +26,17 @@ final class FullName
     public function alias(): string
     {
         return $this->alias->value();
+    }
+
+    public static function buildFromPrimitives(
+        string $namePrimitive,
+        string $lastnamePrimitive,
+        string $aliasPrimitive
+    ): self {
+        $name = new Name($namePrimitive);
+        $lastname = new Lastname($lastnamePrimitive);
+        $alias = new Alias($aliasPrimitive);
+
+        return new self($name, $lastname, $alias);
     }
 }
