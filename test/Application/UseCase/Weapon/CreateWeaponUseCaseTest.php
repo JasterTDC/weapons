@@ -2,18 +2,19 @@
 
 declare(strict_types=1);
 
-namespace JasterTDC\Warriors\Test\Domain\Weapon;
+namespace JasterTDC\Warriors\Test\Application\UseCase\Weapon;
 
-use PHPUnit\Framework\TestCase;
-use JasterTDC\Warriors\Domain\Weapon\Weapon;
-use JasterTDC\Warriors\Domain\Shared\Exception\InvalidName;
+use JasterTDC\Warriors\Application\UseCase\Weapon\CreateWeaponUseCase;
 use JasterTDC\Warriors\Domain\Shared\Exception\InvalidAlias;
 use JasterTDC\Warriors\Domain\Shared\Exception\InvalidLastname;
+use JasterTDC\Warriors\Domain\Shared\Exception\InvalidName;
+use JasterTDC\Warriors\Domain\Weapon\Weapon;
 use JasterTDC\Warriors\Domain\Weapon\WeaponType\WeaponType;
 use JasterTDC\Warriors\Test\Domain\Weapon\ObjectMother\WeaponObjectMother;
 use JasterTDC\Warriors\Test\Domain\Weapon\WeaponType\ObjectMother\WeaponTypeMother;
+use PHPUnit\Framework\TestCase;
 
-final class WeaponTest extends TestCase
+final class CreateWeaponUseCaseTest extends TestCase
 {
     /**
      * @param string $weaponTypePrimitive
@@ -23,13 +24,15 @@ final class WeaponTest extends TestCase
      * @return void
      * @dataProvider dataProviderWhenConstruct
      */
-    public function testGivenValidWhenConstructThenReturnValid(
+    public function testGivenValidWhenHappyPathThenReturnValid(
         string $weaponTypePrimitive,
         string $namePrimitive,
         string $lastnamePrimitive,
         string $aliasPrimitive
     ): void {
-        $weapon = Weapon::buildFromPrimitives(
+        $useCase = new CreateWeaponUseCase();
+
+        $weapon = $useCase->handle(
             $weaponTypePrimitive,
             $namePrimitive,
             $lastnamePrimitive,
@@ -99,7 +102,9 @@ final class WeaponTest extends TestCase
     ): void {
         $this->expectException(InvalidName::class);
 
-        Weapon::buildFromPrimitives($weaponTypePrimitive, $namePrimitive, $lastnamePrimitive, $aliasPrimitive);
+        $useCase = new CreateWeaponUseCase();
+
+        $useCase->handle($weaponTypePrimitive, $namePrimitive, $lastnamePrimitive, $aliasPrimitive);
     }
 
     public function dataProviderForGivenInvalidNameWhenConstruct(): array
@@ -126,7 +131,9 @@ final class WeaponTest extends TestCase
     ): void {
         $this->expectException(InvalidLastname::class);
 
-        Weapon::buildFromPrimitives($weaponTypePrimitive, $namePrimitive, $lastnamePrimitive, $aliasPrimitive);
+        $useCase = new CreateWeaponUseCase();
+
+        $useCase->handle($weaponTypePrimitive, $namePrimitive, $lastnamePrimitive, $aliasPrimitive);
     }
 
     public function dataProviderForGivenInvalidLastnameWhenConstruct(): array
@@ -152,7 +159,9 @@ final class WeaponTest extends TestCase
     ): void {
         $this->expectException(InvalidAlias::class);
 
-        Weapon::buildFromPrimitives($weaponTypePrimitive, $namePrimitive, $lastnamePrimitive, $aliasPrimitive);
+        $useCase = new CreateWeaponUseCase();
+
+        $useCase->handle($weaponTypePrimitive, $namePrimitive, $lastnamePrimitive, $aliasPrimitive);
     }
 
     public function dataProviderForInvalidAlias(): array
@@ -170,58 +179,6 @@ final class WeaponTest extends TestCase
                 'Xun',
                 'BestStrategaEver'
             ]
-        ];
-    }
-
-    /**
-     * @param Weapon $weapon
-     * @param WeaponType $weaponType
-     * @param WeaponType $differentWeaponType
-     * @return void
-     * @dataProvider dataProviderForCompareWeaponType
-     */
-    public function testGivenValidWhenCompareWeaponTypeThenReturnValid(
-        Weapon $weapon,
-        WeaponType $weaponType,
-        WeaponType $differentWeaponType
-    ): void {
-        $this->assertTrue($weapon->equalsWeaponType($weaponType));
-        $this->assertFalse($weapon->equalsWeaponType($differentWeaponType));
-    }
-
-    public function dataProviderForCompareWeaponType(): array
-    {
-        return [
-            'sword, axe' => [
-                WeaponObjectMother::buildCustom(weaponTypePrimitive: WeaponTypeMother::SWORD),
-                WeaponTypeMother::buildSword(),
-                WeaponTypeMother::buildAxe(),
-            ],
-            'sword, dagger' => [
-                WeaponObjectMother::buildCustom(weaponTypePrimitive: WeaponTypeMother::SWORD),
-                WeaponTypeMother::buildSword(),
-                WeaponTypeMother::buildDagger(),
-            ],
-            'axe, sword' => [
-                WeaponObjectMother::buildCustom(weaponTypePrimitive: WeaponTypeMother::AXE),
-                WeaponTypeMother::buildAxe(),
-                WeaponTypeMother::buildSword(),
-            ],
-            'axe, dagger' => [
-                WeaponObjectMother::buildCustom(weaponTypePrimitive: WeaponTypeMother::AXE),
-                WeaponTypeMother::buildAxe(),
-                WeaponTypeMother::buildDagger(),
-            ],
-            'dagger, sword' => [
-                WeaponObjectMother::buildCustom(weaponTypePrimitive: WeaponTypeMother::DAGGER),
-                WeaponTypeMother::buildDagger(),
-                WeaponTypeMother::buildSword(),
-            ],
-            'dagger, axe' => [
-                WeaponObjectMother::buildCustom(weaponTypePrimitive: WeaponTypeMother::DAGGER),
-                WeaponTypeMother::buildDagger(),
-                WeaponTypeMother::buildAxe(),
-            ],
         ];
     }
 }
