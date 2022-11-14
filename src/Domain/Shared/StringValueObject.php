@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace JasterTDC\Warriors\Domain\Shared;
 
-class StringValueObject
+abstract class StringValueObject
 {
     public function __construct(
         private string $value

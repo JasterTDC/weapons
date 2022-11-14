@@ -11,7 +11,8 @@ class Attribute
 {
     public function __construct(
         private AttributeType $type,
-        private Name $name
+        private Name $name,
+        private AttributeLevel $level
     ) {  
     }
 
@@ -23,5 +24,10 @@ class Attribute
     public function type(): string
     {
         return $this->type->value();
+    }
+
+    public function level(): int
+    {
+        return $this->level->value();
     }
 }
