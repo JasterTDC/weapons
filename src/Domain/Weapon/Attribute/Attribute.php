@@ -4,26 +4,22 @@ declare(strict_types=1);
 
 namespace JasterTDC\Warriors\Domain\Weapon\Attribute;
 
-use JasterTDC\Warriors\Domain\Shared\Name\Name;
-use JasterTDC\Warriors\Domain\Weapon\Attribute\AttributeType\AttributeType;
-
 class Attribute
 {
     public function __construct(
-        private AttributeType $type,
-        private Name $name,
+        private AttributeNameType $nameType,
         private AttributeLevel $level
     ) {  
     }
 
     public function name(): string
     {
-        return $this->name->value();
+        return $this->nameType->name();
     }
 
     public function type(): string
     {
-        return $this->type->value();
+        return $this->nameType->type();
     }
 
     public function level(): int
