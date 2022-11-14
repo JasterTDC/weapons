@@ -13,6 +13,7 @@ use JasterTDC\Warriors\Domain\Weapon\Attribute\AttributeType\Rare;
 use JasterTDC\Warriors\Domain\Weapon\Attribute\AttributeType\Common;
 use JasterTDC\Warriors\Domain\Weapon\Attribute\AttributeType\Unique;
 use JasterTDC\Warriors\Domain\Weapon\Attribute\AttributeType\Exceptional;
+use JasterTDC\Warriors\Domain\Weapon\Attribute\Exception\InvalidAttributeName;
 
 final class FromStringAttributeNameTypeFactory
 {
@@ -46,6 +47,7 @@ final class FromStringAttributeNameTypeFactory
                 );
                 break;
             default:
+                throw InvalidAttributeName::build($cleanedAttributeName);
                 break;
         }
 

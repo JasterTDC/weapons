@@ -18,7 +18,8 @@ final class CreateWeaponUseCase
             $primitiveWeaponType,
             $primitiveName,
             $lastName,
-            $alias
+            $alias,
+            []
         );
     }
 }

@@ -18,4 +18,18 @@ final class AttributeCollection extends Collection
     {
         return isset($this->collectionById[$attribute->name()]);
     }
+
+    public static function buildFromPrimitives(array $primitiveAttributes): self
+    {
+        $collection = new self();
+
+        foreach ($primitiveAttributes as $primitiveAttribute) {
+            $collection->addAttribute(Attribute::buildFromPrimitives(
+                $primitiveAttribute[Attribute::NAME],
+                $primitiveAttribute[Attribute::LEVEL]
+            ));
+        }
+
+        return $collection;
+    }
 }

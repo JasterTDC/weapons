@@ -53,11 +53,12 @@ final class Weapon
         string $weaponTypePrimitive,
         string $name,
         string $lastname,
-        string $alias
+        string $alias,
+        array $primitiveAttributes
     ): self {
         $weaponType = FromStringWeaponTypeFactory::buildFromPrimitive($weaponTypePrimitive);
         $fullname = FullName::buildFromPrimitives($name, $lastname, $alias);
-        $attributeCollection = new AttributeCollection();
+        $attributeCollection = AttributeCollection::buildFromPrimitives($primitiveAttributes);
 
         return new self($weaponType, $fullname, $attributeCollection);
     }
