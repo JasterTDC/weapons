@@ -8,6 +8,7 @@ use ArrayIterator;
 use IteratorAggregate;
 use Traversable;
 
+/** @author JasterTDC<jastertdc@gmail.com> */
 abstract class Collection implements IteratorAggregate
 {
     public function __construct(
