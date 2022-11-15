@@ -20,7 +20,7 @@ final class AttributeNameType
         return $this->name->value();
     }
 
-    public function type(): string
+    private function type(): string
     {
         return $this->type->value();
     }

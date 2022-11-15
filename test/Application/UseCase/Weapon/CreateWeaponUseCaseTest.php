@@ -4,27 +4,23 @@ declare(strict_types=1);
 
 namespace JasterTDC\Warriors\Test\Application\UseCase\Weapon;
 
-use JasterTDC\Warriors\Application\UseCase\Weapon\CreateWeaponUseCase;
+use PHPUnit\Framework\TestCase;
+use JasterTDC\Warriors\Domain\Weapon\Attribute\Attribute;
+use JasterTDC\Warriors\Domain\Shared\Exception\InvalidName;
 use JasterTDC\Warriors\Domain\Shared\Exception\InvalidAlias;
 use JasterTDC\Warriors\Domain\Shared\Exception\InvalidLastname;
-use JasterTDC\Warriors\Domain\Shared\Exception\InvalidName;
 use JasterTDC\Warriors\Domain\Shared\Level\Exception\InvalidLevel;
-use JasterTDC\Warriors\Domain\Weapon\Attribute\Attribute;
 use JasterTDC\Warriors\Domain\Weapon\Attribute\AttributeCollection;
-use JasterTDC\Warriors\Domain\Weapon\Attribute\Exception\InvalidAttributeLevel;
+use JasterTDC\Warriors\Application\UseCase\Weapon\CreateWeaponUseCase;
 use JasterTDC\Warriors\Domain\Weapon\Attribute\Exception\InvalidAttributeName;
-use JasterTDC\Warriors\Domain\Weapon\Attribute\Name\AttributeName;
-use JasterTDC\Warriors\Domain\Weapon\Weapon;
-use JasterTDC\Warriors\Domain\Weapon\WeaponType\WeaponType;
-use JasterTDC\Warriors\Test\Domain\Weapon\Attribute\AttributeType\ObjectMother\AttributeTypeObjectMother;
-use JasterTDC\Warriors\Test\Domain\Weapon\Attribute\Name\ObjectMother\AttributeNameObjectMother;
-use JasterTDC\Warriors\Test\Domain\Weapon\Attribute\ObjectMother\AttributeCollectionObjectMother;
+use JasterTDC\Warriors\Domain\Weapon\Attribute\Exception\InvalidAttributeLevel;
+use JasterTDC\Warriors\Test\Domain\Weapon\WeaponType\ObjectMother\WeaponTypeMother;
+use JasterTDC\Warriors\Test\Domain\Weapon\Attribute\ObjectMother\AttributeObjectMother;
 use JasterTDC\Warriors\Test\Domain\Weapon\Attribute\ObjectMother\AttributeLevelObjectMother;
 use JasterTDC\Warriors\Test\Domain\Weapon\Attribute\ObjectMother\AttributeNameTypeObjectMother;
-use JasterTDC\Warriors\Test\Domain\Weapon\Attribute\ObjectMother\AttributeObjectMother;
-use JasterTDC\Warriors\Test\Domain\Weapon\ObjectMother\WeaponObjectMother;
-use JasterTDC\Warriors\Test\Domain\Weapon\WeaponType\ObjectMother\WeaponTypeMother;
-use PHPUnit\Framework\TestCase;
+use JasterTDC\Warriors\Test\Domain\Weapon\Attribute\Name\ObjectMother\AttributeNameObjectMother;
+use JasterTDC\Warriors\Test\Domain\Weapon\Attribute\ObjectMother\AttributeCollectionObjectMother;
+use JasterTDC\Warriors\Test\Domain\Weapon\Attribute\AttributeType\ObjectMother\AttributeTypeObjectMother;
 
 final class CreateWeaponUseCaseTest extends TestCase
 {
@@ -91,7 +87,7 @@ final class CreateWeaponUseCaseTest extends TestCase
                     ],
                     [
                         Attribute::NAME => AttributeNameObjectMother::FRENZY,
-                        Attribute::LEVEL => 1
+                        Attribute::LEVEL => 20
                     ]
                 ],
                 AttributeCollectionObjectMother::buildCustom(
@@ -121,7 +117,7 @@ final class CreateWeaponUseCaseTest extends TestCase
                             AttributeNameObjectMother::frenzy(),
                             AttributeTypeObjectMother::unique()
                         ),
-                        AttributeLevelObjectMother::buildCustom(1)
+                        AttributeLevelObjectMother::buildCustom(20)
                     ),
                 )
             ],
@@ -130,8 +126,21 @@ final class CreateWeaponUseCaseTest extends TestCase
                 'Xin',
                 'Xialing',
                 'Xialing',
-                [],
-                AttributeCollectionObjectMother::buildEmpty()
+                [
+                    [
+                        Attribute::NAME => strtoupper(AttributeNameObjectMother::ATTACK),
+                        Attribute::LEVEL => 1
+                    ],
+                ],
+                AttributeCollectionObjectMother::buildCustom(
+                    AttributeObjectMother::buildCustom(
+                        AttributeNameTypeObjectMother::buildCustom(
+                            AttributeNameObjectMother::attack(),
+                            AttributeTypeObjectMother::common()
+                        ),
+                        AttributeLevelObjectMother::buildCustom(1)
+                    ),
+                )
             ],
             'axe, Xiapiomaturaea Ning' => [
                 WeaponTypeMother::AXE,
@@ -285,21 +294,15 @@ final class CreateWeaponUseCaseTest extends TestCase
         $useCase->handle($weaponTypePrimitive, $namePrimitive, $lastnamePrimitive, $aliasPrimitive, $primitiveAttributes);
     }
 
-    public function testGivenInvalidLevelWhenConstructThenExceptionIsThrown(): void
-    {
+    /** @dataProvider dataProviderForInvalidLevel */
+    public function testGivenInvalidLevelWhenConstructThenExceptionIsThrown(
+        string $weaponTypePrimitive,
+        string $namePrimitive,
+        string $lastnamePrimitive,
+        string $aliasPrimitive,
+        array $primitiveAttributes
+    ): void {
         $this->expectException(InvalidLevel::class);
-
-        // Given
-        $weaponTypePrimitive = WeaponTypeMother::SWORD;
-        $namePrimitive = 'Lu';
-        $lastnamePrimitive = 'Xun';
-        $aliasPrimitive = 'Kaido';
-        $primitiveAttributes = [
-            [
-                Attribute::NAME => AttributeNameObjectMother::ATTACK,
-                Attribute::LEVEL => -10
-            ]
-        ];
 
         $useCase = new CreateWeaponUseCase();
 
@@ -310,6 +313,36 @@ final class CreateWeaponUseCaseTest extends TestCase
             $aliasPrimitive,
             $primitiveAttributes
         );
+    }
+
+    public function dataProviderForInvalidLevel(): array
+    {
+        return [
+            'Lu Xun Kaido, Sword, Level 0' => [
+                WeaponTypeMother::SWORD,
+                'Lu',
+                'Xun',
+                'Kaido',
+                [
+                    [
+                        Attribute::NAME => AttributeNameObjectMother::ATTACK,
+                        Attribute::LEVEL => 0
+                    ]
+                ],
+            ],
+            'Lu Xun Kaido, Sword, Level under 0' => [
+                WeaponTypeMother::SWORD,
+                'Lu',
+                'Xun',
+                'Kaido',
+                [
+                    [
+                        Attribute::NAME => AttributeNameObjectMother::ATTACK,
+                        Attribute::LEVEL => -10
+                    ]
+                ],
+            ]
+        ];
     }
 
     public function testGivenInvalidAttributeLevelWhenConstructThenExceptionIsThrown(): void

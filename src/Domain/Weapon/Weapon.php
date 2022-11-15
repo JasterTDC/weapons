@@ -49,11 +49,6 @@ final class Weapon
         return $this->attributeCollection->hasExactlyAttribute($attribute);
     }
 
-    public function getAttribute(Attribute $attribute): ?Attribute
-    {
-        return $this->attributeCollection->getAttribute($attribute);
-    }
-
     public function attributesCount(): int
     {
         return $this->attributeCollection->count();
