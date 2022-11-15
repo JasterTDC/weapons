@@ -16,7 +16,7 @@ abstract class IntegerValueObject
         return $this->value === $integerValueObject->value();
     }
 
-    public function value(): int
+    private function value(): int
     {
         return $this->value;
     }

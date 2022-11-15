@@ -10,6 +10,9 @@ final class AttributeCollection extends Collection
 {
     public function addAttribute(Attribute $attribute): void
     {
+        if (!empty($this->getAttribute($attribute))) {
+            return ;
+        }
         $this->collection[] = $attribute;
         $this->collectionById[$attribute->name()] = $attribute;
     }
@@ -37,7 +40,7 @@ final class AttributeCollection extends Collection
             $selectedAttribute->equalsLevel($attribute);
     }
 
-    public function getAttribute(Attribute $attribute): ?Attribute
+    private function getAttribute(Attribute $attribute): ?Attribute
     {
         if (!isset($this->collectionById[$attribute->name()])) {
             return null;

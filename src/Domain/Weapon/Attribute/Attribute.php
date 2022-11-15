@@ -22,16 +22,6 @@ class Attribute
         return $this->nameType->name();
     }
 
-    protected function nameType(): AttributeNameType
-    {
-        return $this->nameType;
-    }
-
-    protected function level(): AttributeLevel
-    {
-        return $this->level;
-    }
-
     public function equalsNameType(Attribute $attribute): bool
     {
         return $this->nameType->equals($attribute->nameType());   
@@ -40,6 +30,16 @@ class Attribute
     public function equalsLevel(Attribute $attribute): bool
     {
         return $this->level->equals($attribute->level());
+    }
+
+    private function nameType(): AttributeNameType
+    {
+        return $this->nameType;
+    }
+
+    private function level(): AttributeLevel
+    {
+        return $this->level;
     }
 
     public static function buildFromPrimitives(string $primitiveName, int $primitiveLevel): self
