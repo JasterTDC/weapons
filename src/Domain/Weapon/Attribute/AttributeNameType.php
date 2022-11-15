@@ -24,4 +24,10 @@ final class AttributeNameType
     {
         return $this->type->value();
     }
+
+    public function equals(AttributeNameType $nameType): bool
+    {
+        return $nameType->name() === $this->name() &&
+            $nameType->type() === $this->type();
+    }
 }

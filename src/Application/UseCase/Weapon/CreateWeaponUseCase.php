@@ -12,14 +12,15 @@ final class CreateWeaponUseCase
         string $primitiveWeaponType,
         string $primitiveName,
         string $lastName,
-        string $alias
+        string $alias,
+        array $primitiveAttributes
     ): Weapon {
         return Weapon::buildFromPrimitives(
             $primitiveWeaponType,
             $primitiveName,
             $lastName,
             $alias,
-            []
+            $primitiveAttributes
         );
     }
 }
