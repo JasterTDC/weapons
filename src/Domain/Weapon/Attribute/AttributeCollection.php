@@ -16,6 +16,47 @@ final class AttributeCollection extends Collection
 
     public function hasAttribute(Attribute $attribute): bool
     {
-        return isset($this->collectionById[$attribute->name()]);
+        $selectedAttribute = $this->getAttribute($attribute);
+
+        if (null === $selectedAttribute) {
+            return false;
+        }
+        
+        return $selectedAttribute->equalsNameType($attribute);
+    }
+
+    public function hasExactlyAttribute(Attribute $attribute): bool
+    {
+        $selectedAttribute = $this->getAttribute($attribute);
+
+        if (null === $selectedAttribute) {
+            return false;
+        }
+        
+        return $selectedAttribute->equalsNameType($attribute) &&
+            $selectedAttribute->equalsLevel($attribute);
+    }
+
+    public function getAttribute(Attribute $attribute): ?Attribute
+    {
+        if (!isset($this->collectionById[$attribute->name()])) {
+            return null;
+        }
+
+        return $this->collectionById[$attribute->name()];
+    }
+
+    public static function buildFromPrimitives(array $primitiveAttributes): self
+    {
+        $collection = new self();
+
+        foreach ($primitiveAttributes as $primitiveAttribute) {
+            $collection->addAttribute(Attribute::buildFromPrimitives(
+                $primitiveAttribute[Attribute::NAME],
+                $primitiveAttribute[Attribute::LEVEL]
+            ));
+        }
+
+        return $collection;
     }
 }

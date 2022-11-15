@@ -19,11 +19,6 @@ final class Weapon
     ) {
     }
 
-    public function equalsWeaponType(WeaponType $weaponType): bool
-    {
-        return $this->weaponType->equals($weaponType);
-    }
-
     public function name(): string
     {
         return $this->weaponName->name();
@@ -49,15 +44,31 @@ final class Weapon
         return $this->attributeCollection->hasAttribute($attribute);
     }
 
+    public function hasExactlyAttribute(Attribute $attribute): bool
+    {
+        return $this->attributeCollection->hasExactlyAttribute($attribute);
+    }
+
+    public function getAttribute(Attribute $attribute): ?Attribute
+    {
+        return $this->attributeCollection->getAttribute($attribute);
+    }
+
+    public function attributesCount(): int
+    {
+        return $this->attributeCollection->count();
+    }
+
     public static function buildFromPrimitives(
         string $weaponTypePrimitive,
         string $name,
         string $lastname,
-        string $alias
+        string $alias,
+        array $primitiveAttributes
     ): self {
         $weaponType = FromStringWeaponTypeFactory::buildFromPrimitive($weaponTypePrimitive);
         $fullname = FullName::buildFromPrimitives($name, $lastname, $alias);
-        $attributeCollection = new AttributeCollection();
+        $attributeCollection = AttributeCollection::buildFromPrimitives($primitiveAttributes);
 
         return new self($weaponType, $fullname, $attributeCollection);
     }
