@@ -41,22 +41,13 @@ final class Weapon
             throw InvalidFuseWeaponType::build($this->weaponTypeValue(), $weapon->weaponTypeValue());
         }
 
-        $currentWeapon = new self(
+        $fusedAttributeCollection = $this->attributeCollection->fuse($weapon->attributeCollection());
+
+        return new self(
             $this->weaponType(),
             $this->fullName(),
-            $this->attributeCollection()
-        );
-
-        /** @var Attribute $attribute */
-        foreach ($weapon->attributeCollection() as $attribute) {
-            if ($currentWeapon->hasAttribute($attribute)) {
-                continue ;
-            }
-
-            $currentWeapon->addAttribute($attribute);
-        }
-
-        return $currentWeapon;
+            $fusedAttributeCollection
+        );;
     }
 
     public function addAttribute(Attribute $attribute): void

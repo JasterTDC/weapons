@@ -15,6 +15,11 @@ class Level extends IntegerValueObject
         parent::__construct($primitiveLevel);
     }
 
+    public function isLesserThan(Level $level): bool
+    {
+        return $this->value < $level->value();
+    }
+
     private function ensureIsValid(int $primitiveLevel): void
     {
         if ($primitiveLevel <= 0) {

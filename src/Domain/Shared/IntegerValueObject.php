@@ -7,7 +7,7 @@ namespace JasterTDC\Warriors\Domain\Shared;
 abstract class IntegerValueObject
 {
     public function __construct(
-        private int $value
+        protected int $value
     ) {  
     }
 
@@ -16,7 +16,7 @@ abstract class IntegerValueObject
         return $this->value === $integerValueObject->value();
     }
 
-    private function value(): int
+    public function value(): int
     {
         return $this->value;
     }
