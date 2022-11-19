@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace JasterTDC\Warriors\Domain\Weapon\Attribute;
 
+use JasterTDC\Warriors\Domain\Weapon\Attribute\Exception\InvalidFuseAttribute;
 use JasterTDC\Warriors\Domain\Weapon\Attribute\Factory\FromStringAttributeNameTypeFactory;
 
 class Attribute
@@ -32,6 +33,15 @@ class Attribute
         return $this->level->equals($attribute->level());
     }
 
+    public function fuse(Attribute $attribute): Attribute
+    {
+        if ($attribute->isLevelLesserThan($this)) {
+            return $this;
+        }
+
+        return new self($this->nameType, new AttributeLevel($this->levelValue() + 1));
+    }
+
     private function nameType(): AttributeNameType
     {
         return $this->nameType;
@@ -40,6 +50,16 @@ class Attribute
     private function level(): AttributeLevel
     {
         return $this->level;
+    }
+
+    private function levelValue(): int
+    {
+        return $this->level->value();
+    }
+
+    private function isLevelLesserThan(Attribute $attribute): bool
+    {
+        return $this->level->isLesserThan($attribute->level());
     }
 
     public static function buildFromPrimitives(string $primitiveName, int $primitiveLevel): self
