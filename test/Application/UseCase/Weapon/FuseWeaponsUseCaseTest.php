@@ -27,6 +27,7 @@ final class FuseWeaponsUseCaseTest extends TestCase
         $this->assertEquals($expectedFusedWeapon->name(), $fusedWeapon->name());
         $this->assertEquals($expectedFusedWeapon->lastname(), $fusedWeapon->lastname());
         $this->assertEquals($expectedFusedWeapon->alias(), $fusedWeapon->alias());
+
         $this->assertEquals($expectedFusedWeapon->attributesCount(), $fusedWeapon->attributesCount());
 
         /** @var Attribute $attribute */
@@ -72,6 +73,43 @@ final class FuseWeaponsUseCaseTest extends TestCase
                     ],
                 ),
             ],
+            'sword with attack level 5, sword with attack level 2, courage level 3' => [
+                WeaponObjectMother::buildCustom(
+                    weaponTypePrimitive: WeaponTypeMother::SWORD,
+                    primitiveAttributes: [
+                        [
+                            Attribute::NAME => AttributeNameObjectMother::ATTACK,
+                            Attribute::LEVEL => 5
+                        ],
+                    ],
+                ),
+                WeaponObjectMother::buildCustom(
+                    weaponTypePrimitive: WeaponTypeMother::SWORD,
+                    primitiveAttributes: [
+                        [
+                            Attribute::NAME => AttributeNameObjectMother::ATTACK,
+                            Attribute::LEVEL => 2
+                        ],
+                        [
+                            Attribute::NAME => AttributeNameObjectMother::COURAGE,
+                            Attribute::LEVEL => 3
+                        ],
+                    ],
+                ),
+                WeaponObjectMother::buildCustom(
+                    weaponTypePrimitive: WeaponTypeMother::SWORD,
+                    primitiveAttributes: [
+                        [
+                            Attribute::NAME => AttributeNameObjectMother::ATTACK,
+                            Attribute::LEVEL => 5
+                        ],
+                        [
+                            Attribute::NAME => AttributeNameObjectMother::COURAGE,
+                            Attribute::LEVEL => 3
+                        ],
+                    ],
+                ),
+            ],
             'sword with attack level 1, sword with attack level 5' => [
                 WeaponObjectMother::buildCustom(
                     weaponTypePrimitive: WeaponTypeMother::SWORD,
@@ -96,7 +134,7 @@ final class FuseWeaponsUseCaseTest extends TestCase
                     primitiveAttributes: [
                         [
                             Attribute::NAME => AttributeNameObjectMother::ATTACK,
-                            Attribute::LEVEL => 1
+                            Attribute::LEVEL => 2
                         ],
                     ],
                 ),
@@ -137,7 +175,7 @@ final class FuseWeaponsUseCaseTest extends TestCase
                     primitiveAttributes: [
                         [
                             Attribute::NAME => AttributeNameObjectMother::ATTACK,
-                            Attribute::LEVEL => 1
+                            Attribute::LEVEL => 2
                         ],
                         [
                             Attribute::NAME => AttributeNameObjectMother::COURAGE,
