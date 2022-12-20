@@ -3,9 +3,12 @@
         <testsuite name="Unit">
             <directory suffix="Test.php">test/Domain/</directory>
             <directory suffix="Test.php">test/Application/</directory>
+            <directory suffix="Test.php">test/*/Domain/</directory>
+            <directory suffix="Test.php">test/*/Application/</directory>
         </testsuite>
         <testsuite name="Integration">
             <directory suffix="Test.php">test/Infrastructure/</directory>
+            <directory suffix="Test.php">test/*/Infrastructure/</directory>
         </testsuite>
         <testsuite name="UnitIntegration">
             <directory suffix="Test.php">test/</directory>
