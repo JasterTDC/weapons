@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace JasterTDC\Warriors\Domain\Weapon\Attribute;
 
-use JasterTDC\Warriors\Domain\Weapon\Attribute\AttributeType\AttributeType;
+use JasterTDC\Warriors\AttributeType\Domain\AttributeType;
 use JasterTDC\Warriors\Domain\Weapon\Attribute\Name\AttributeName;
 
 final class AttributeNameType

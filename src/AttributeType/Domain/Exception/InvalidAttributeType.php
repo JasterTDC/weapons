@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace JasterTDC\Warriors\Domain\Weapon\Attribute\AttributeType\Exception;
+namespace JasterTDC\Warriors\AttributeType\Domain\Exception;
 
 use Exception;
 

@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace JasterTDC\Warriors\Domain\Weapon\Attribute\AttributeType\Factory;
+namespace JasterTDC\Warriors\AttributeType\Domain\Factory;
 
-use JasterTDC\Warriors\Domain\Weapon\Attribute\AttributeType\AttributeType;
-use JasterTDC\Warriors\Domain\Weapon\Attribute\AttributeType\Common;
-use JasterTDC\Warriors\Domain\Weapon\Attribute\AttributeType\Exception\InvalidAttributeType;
-use JasterTDC\Warriors\Domain\Weapon\Attribute\AttributeType\Exceptional;
-use JasterTDC\Warriors\Domain\Weapon\Attribute\AttributeType\Rare;
-use JasterTDC\Warriors\Domain\Weapon\Attribute\AttributeType\Unique;
+use JasterTDC\Warriors\AttributeType\Domain\AttributeType;
+use JasterTDC\Warriors\AttributeType\Domain\Common;
+use JasterTDC\Warriors\AttributeType\Domain\Exception\InvalidAttributeType;
+use JasterTDC\Warriors\AttributeType\Domain\Exceptional;
+use JasterTDC\Warriors\AttributeType\Domain\Rare;
+use JasterTDC\Warriors\AttributeType\Domain\Unique;
 
-final class FromStringAttributeTypeFactory
+final class AttributeTypeFactory
 {
     public static function build(string $attributeTypePrimitive): AttributeType
     {

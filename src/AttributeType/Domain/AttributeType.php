@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace JasterTDC\Warriors\Domain\Weapon\Attribute\AttributeType;
+namespace JasterTDC\Warriors\AttributeType\Domain;
 
 use JasterTDC\Warriors\Domain\Shared\StringValueObject;
 

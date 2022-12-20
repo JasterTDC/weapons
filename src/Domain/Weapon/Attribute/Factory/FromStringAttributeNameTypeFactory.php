@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace JasterTDC\Warriors\Domain\Weapon\Attribute\Factory;
 
+use JasterTDC\Warriors\AttributeType\Domain\Common;
+use JasterTDC\Warriors\AttributeType\Domain\Exceptional;
+use JasterTDC\Warriors\AttributeType\Domain\Rare;
+use JasterTDC\Warriors\AttributeType\Domain\Unique;
 use JasterTDC\Warriors\Domain\Weapon\Attribute\Name\Death;
 use JasterTDC\Warriors\Domain\Weapon\Attribute\Name\Attack;
 use JasterTDC\Warriors\Domain\Weapon\Attribute\Name\Frenzy;
 use JasterTDC\Warriors\Domain\Weapon\Attribute\Name\Courage;
 use JasterTDC\Warriors\Domain\Weapon\Attribute\AttributeNameType;
-use JasterTDC\Warriors\Domain\Weapon\Attribute\AttributeType\Rare;
-use JasterTDC\Warriors\Domain\Weapon\Attribute\AttributeType\Common;
-use JasterTDC\Warriors\Domain\Weapon\Attribute\AttributeType\Unique;
-use JasterTDC\Warriors\Domain\Weapon\Attribute\AttributeType\Exceptional;
 use JasterTDC\Warriors\Domain\Weapon\Attribute\Exception\InvalidAttributeName;
 
 final class FromStringAttributeNameTypeFactory
