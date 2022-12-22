@@ -8,6 +8,7 @@ use JasterTDC\Warriors\AttributeName\Domain\Wind;
 use JasterTDC\Warriors\AttributeName\Domain\AttributeName;
 use JasterTDC\Warriors\AttributeName\Domain\Exception\InvalidAttributeName;
 use JasterTDC\Warriors\AttributeName\Domain\Fire;
+use JasterTDC\Warriors\AttributeName\Domain\Light;
 
 final class AttributeNameFactory
 {
@@ -16,6 +17,7 @@ final class AttributeNameFactory
         return match($primitiveName) {
             'wind' => new Wind(),
             'fire' => new Fire(),
+            'light' => new Light(),
             default => throw InvalidAttributeName::build($primitiveName)
         };
     }
