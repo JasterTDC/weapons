@@ -27,6 +27,7 @@ final class AttributeNameFactoryTest extends TestCase
         return [
             'wind' => ['wind', AttributeNameObjectMother::wind()],
             'fire' => ['fire', AttributeNameObjectMother::fire()],
+            'light' => ['light', AttributeNameObjectMother::light()]
         ];
     }
 

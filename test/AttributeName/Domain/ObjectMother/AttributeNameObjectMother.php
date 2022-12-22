@@ -6,6 +6,7 @@ namespace JasterTDC\Warriors\Test\AttributeName\Domain\ObjectMother;
 
 use JasterTDC\Warriors\AttributeName\Domain\AttributeName;
 use JasterTDC\Warriors\AttributeName\Domain\Fire;
+use JasterTDC\Warriors\AttributeName\Domain\Light;
 use JasterTDC\Warriors\AttributeName\Domain\Wind;
 
 final class AttributeNameObjectMother
@@ -18,5 +19,10 @@ final class AttributeNameObjectMother
     public static function fire(): AttributeName
     {
         return new Fire();
+    }
+
+    public static function light(): AttributeName
+    {
+        return new Light();
     }
 }

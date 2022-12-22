@@ -17,6 +17,7 @@ final class AttributeLevelTest extends TestCase
         $attributeLevel = new AttributeLevel($level);
 
         $this->assertEquals($level, $attributeLevel->value());
+        $this->assertTrue($attributeLevel->equals($attributeLevel));
     }
 
     public function dataProviderForHappyPath(): array
