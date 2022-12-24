@@ -11,6 +11,10 @@ use JasterTDC\Warriors\AttributeName\Domain\Wind;
 
 final class AttributeNameObjectMother
 {
+    public const FIRE = 'fire';
+    public const LIGHT = 'light';
+    public const WIND = 'wind';
+
     public static function wind(): AttributeName
     {
         return new Wind();
