@@ -21,4 +21,28 @@ final class AttributeNameTypeObjectMother
             $type ?? AttributeTypeObjectMother::common()
         );
     }
+
+    public static function fire(): AttributeNameType
+    {
+        return new AttributeNameType(
+            AttributeNameObjectMother::fire(),
+            AttributeTypeObjectMother::common()
+        );
+    }
+
+    public static function wind(): AttributeNameType
+    {
+        return new AttributeNameType(
+            AttributeNameObjectMother::wind(),
+            AttributeTypeObjectMother::common()
+        );
+    }
+
+    public static function light(): AttributeNameType
+    {
+        return new AttributeNameType(
+            AttributeNameObjectMother::light(),
+            AttributeTypeObjectMother::rare()
+        );
+    }
 }
