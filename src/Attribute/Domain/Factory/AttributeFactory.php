@@ -8,6 +8,7 @@ use JasterTDC\Warriors\Attribute\Domain\Attribute;
 use JasterTDC\Warriors\AttributeLevel\Domain\AttributeLevel;
 use JasterTDC\Warriors\Shared\Domain\Exception\InvalidLevel;
 use JasterTDC\Warriors\AttributeLevel\Domain\Exception\InvalidAttributeLevel;
+use JasterTDC\Warriors\AttributeName\Domain\Exception\InvalidAttributeName;
 use JasterTDC\Warriors\AttributeNameType\Domain\Factory\AttributeNameTypeFactory;
 
 final class AttributeFactory
